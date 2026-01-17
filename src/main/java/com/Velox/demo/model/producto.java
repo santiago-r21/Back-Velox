@@ -1,12 +1,13 @@
 package com.Velox.demo.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name="Producto")
 public class producto {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,13 +15,16 @@ public class producto {
     private String nombre;
     private String descripcion;
     private double precio;
-    private int stock;
+    private Long stock;
     private String imagen;
+//    @OneToMany(mappedBy = "producto",cascade = CascadeType.ALL,orphanRemoval = true)
+//    @JsonManagedReference
+//    private List<detalle_pedido> detallePedidos;
 
     public producto() {
     }
 
-    public producto(Long id_producto, String nombre, String descripcion, double precio, int stock, String imagen) {
+    public producto(Long id_producto, String nombre, String descripcion, double precio, Long stock, String imagen) {
         this.id_producto = id_producto;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -61,11 +65,11 @@ public class producto {
         this.precio = precio;
     }
 
-    public int getStock() {
+    public Long getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Long stock) {
         this.stock = stock;
     }
 
